@@ -52,7 +52,7 @@ export function HomeContactForm() {
     {
       icon: Mail,
       title: t('contact.info.email') || 'Email',
-      value: 'info@ebdaafalcon.com',
+      value: 'info@efalcon.sa',
       color: 'from-green-500 to-green-600'
     },
     {
