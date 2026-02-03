@@ -245,10 +245,10 @@ export function Footer() {
                       <Mail className="w-4 h-4 text-white" />
                     </div>
                     <a 
-                      href="mailto:info@ebdaafalcon.com" 
+                      href="mailto:info@efalcon.sa" 
                       className="text-gray-300 font-['ADLaM_Display:Regular',_sans-serif] text-[15px] hover:text-white transition-colors duration-300"
                     >
-                      info@ebdaafalcon.com
+                      info@efalcon.sa
                     </a>
                   </motion.div>
 
