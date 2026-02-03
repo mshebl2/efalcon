@@ -31,8 +31,8 @@ export function ContactInfo() {
       id: '2',
       icon: Mail,
       title: t('contact.info.email') || 'Email',
-      value: 'info@ebdaafalcon.com',
-      link: 'mailto:info@ebdaafalcon.com',
+      value: 'info@efalcon.sa',
+      link: 'mailto:info@efalcon.sa',
       color: 'from-green-500 to-green-600'
     },
     {
@@ -250,7 +250,7 @@ export function ContactInfo() {
               </motion.a>
               
               <motion.a
-                href="mailto:info@ebdaafalcon.com"
+                href="mailto:info@efalcon.sa"
                 className="relative bg-transparent border-2 border-white text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-[#EFC132] transition-colors duration-300 overflow-hidden group"
                 whileHover={{ y: -3, scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
