@@ -28,7 +28,7 @@ export function FAQSection() {
     { group: 'services', q: 'Do you offer tailored solutions?', a: 'Yes. We design solutions to your technical and regulatory needs.' },
     { group: 'projects', q: 'How do projects typically start?', a: 'Discovery call → scoping → proposal → structured kickoff.' },
     { group: 'projects', q: 'What are typical delivery timelines?', a: 'Depends on scope; we share a milestone plan with dependencies.' },
-    { group: 'support', q: 'How can I request a quotation?', a: 'Use the contact form or email info@ebdaafalcon.com.' },
+    { group: 'support', q: 'How can I request a quotation?', a: 'Use the contact form or email info@efalcon.sa.' },
     { group: 'support', q: 'Do you provide after‑delivery support?', a: 'Yes. Warranty, maintenance, and training are available.' }
   ];
   const items: FAQItem[] = Array.isArray(rawItems) && rawItems.length > 0
