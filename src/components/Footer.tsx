@@ -297,11 +297,12 @@ export function Footer() {
             <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
               <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                 <motion.p 
-                  className="font-['ADLaM_Display:Regular',_sans-serif] text-[14px] text-gray-400 text-center md:text-left"
-                  variants={itemVariants}
-                >
-                  {t('footer.copyright') || `© ${currentYear} Ebdaa Falcon. All rights reserved.`}
-                </motion.p>
+  className="font-['ADLaM_Display:Regular',_sans-serif] text-[14px] text-gray-400 text-center"
+  variants={itemVariants}
+>
+  {t('footer.copyright') || `© ${currentYear} efalcon. All rights reserved.`}
+</motion.p>
+
                 
               </div>
             </div>
