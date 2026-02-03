@@ -12,22 +12,65 @@ import { fonts } from '@/lib/fonts';
 import './globals.css';
 
 export const metadata = {
-  title: 'Ebdaa Falcon - Petroleum Derivatives and Logistics Services',
-  description: 'Ebdaa Falcon is specialized in storing, transporting, and trading petroleum products.',
-  manifest: '/manifest.json',
+  title: {
+    default: 'Ebdaa Falcon | ابداع فالكون – Oil & Gas Projects and Logistics',
+    template: '%s | Ebdaa Falcon – ابداع فالكون',
+  },
+  description: 'Ebdaa Falcon (ابداع فالكون) شركة متخصصة في مشاريع النفط والغاز، تخزين البترول، الخدمات اللوجستية، وتداول المشتقات النفطية في المملكة العربية السعودية والشرق الأوسط وأفريقيا.',
+
+  keywords: [
+    'Ebdaa Falcon',
+    'ابداع فالكون',
+    'مشاريع النفط والغاز',
+    'تخزين البترول',
+    'الخدمات اللوجستية',
+    'مشتقات نفطية',
+    'Oil and Gas Projects',
+    'Petroleum Storage',
+    'Logistics Services',
+    'Saudi Arabia Oil Company',
+    'Riyadh Oil and Gas',
+  ],
+
+  alternates: {
+    canonical: 'https://www.efalcon.sa',
+    languages: {
+      ar: 'https://www.efalcon.sa',
+      en: 'https://www.efalcon.sa',
+    },
+  },
+
+  openGraph: {
+    type: 'website',
+    locale: 'ar_SA',
+    alternateLocale: ['en_US'],
+    url: 'https://www.efalcon.sa',
+    title: 'Ebdaa Falcon | ابداع فالكون – مشاريع النفط والغاز',
+    description: 'مشاريع نفط وغاز متقدمة، منشآت تخزين البترول، ومراكز تداول استراتيجية في السعودية والشرق الأوسط.',
+
+    images: [
+      {
+        url: '/logofirstsection.png',
+        width: 1200,
+        height: 630,
+        alt: 'Ebdaa Falcon – ابداع فالكون',
+      },
+    ],
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ebdaa Falcon | ابداع فالكون',
+    description: 'Oil & Gas Projects, Petroleum Storage and Logistics Services in Saudi Arabia.',
+    images: ['/logofirstsection.png'],
+  },
+
   icons: {
     icon: [
       { url: '/logofirstsection.png', sizes: '32x32', type: 'image/png' },
       { url: '/logofirstsection.png', sizes: '16x16', type: 'image/png' },
-      { url: '/logofirstsection.png', rel: 'shortcut icon' },
     ],
-    apple: [
-      { url: '/logofirstsection.png', sizes: '180x180', type: 'image/png' },
-    ],
-    other: [
-      { url: '/logofirstsection.png', rel: 'icon', sizes: '192x192', type: 'image/png' },
-      { url: '/logofirstsection.png', rel: 'icon', sizes: '512x512', type: 'image/png' },
-    ],
+    apple: [{ url: '/logofirstsection.png', sizes: '180x180' }],
   },
 };
 
@@ -48,26 +91,91 @@ export default function RootLayout({
         {/* Critical resource hints for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* Preload critical resources */}
+
         <link rel="preload" href="/logofirstsection.webp" as="image" type="image/webp" />
         <link rel="preload" href="/ourworkbanner.webp" as="image" type="image/webp" />
-        
-        {/* DNS prefetch for external resources */}
+
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-        
-        {/* Preload critical CSS */}
+
         <link rel="preload" href="/_next/static/css/app/layout.css" as="style" />
-        
-        {/* Mobile-specific resource hints */}
-        <link rel="preload" href="/logofirstsection.webp" as="image" type="image/webp" media="(max-width: 768px)" />
-        <link rel="preload" href="/vision.webp" as="image" type="image/webp" media="(max-width: 768px)" />
-        <link rel="preload" href="/our presence around .png" as="image" type="image/png" media="(max-width: 768px)" />
-        
-        {/* Mobile-optimized font loading */}
-        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Alfa+Slab+One&display=swap" as="style" media="(max-width: 768px)" />
+
+        {/* Schema JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Ebdaa Falcon | ابداع فالكون",
+              "url": "https://www.efalcon.sa",
+              "logo": "https://www.efalcon.sa/logofirstsection.png",
+              "image": "https://www.efalcon.sa/logofirstsection.png",
+              "description": "Ebdaa Falcon (ابداع فالكون) شركة متخصصة في مشاريع النفط والغاز، تخزين البترول، الخدمات اللوجستية، وتداول المشتقات النفطية في السعودية والشرق الأوسط وأفريقيا.",
+
+              "telephone": "+966565145666",
+              "areaServed": [
+                {
+                  "@type": "AdministrativeArea",
+                  "name": "Riyadh"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Saudi Arabia"
+                },
+                {
+                  "@type": "Continent",
+                  "name": "Africa"
+                }
+              ],
+
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "SA",
+                "addressRegion": "Riyadh"
+              },
+
+              "foundingDate": "2025",
+
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Oil & Gas Services",
+                "itemListElement": [
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Petroleum Storage Facilities"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Oil & Gas Integrated Solutions"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Logistics & Marine Services"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Water Desalination & Alternative Energy"
+                    }
+                  }
+                ]
+              }
+            }),
+          }}
+        />
       </head>
+
       <body className="antialiased">
         <PerformanceMonitor />
         <MobilePerformanceMonitor />
