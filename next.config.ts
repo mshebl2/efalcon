@@ -22,10 +22,23 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'www.efalcon.sa',
+      },
+      {
+        protocol: 'https',
+        hostname: 'efalcon.sa',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.vercel.app',
+      },
+      {
+        protocol: 'https',
         hostname: '**',
       },
     ],
-    unoptimized: false, // Ensure optimization is enabled
+    // Disable optimization for API routes to avoid 400 errors
+    unoptimized: process.env.NODE_ENV === 'development',
   },
   experimental: {
     optimizeCss: true,

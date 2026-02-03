@@ -2,13 +2,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import dynamic from 'next/dynamic';
-import * as THREE from 'three';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
+// THREE.TOUCH constants - use numeric values to avoid importing THREE
+// These values match Three.js internal constants
+const TOUCH = { ROTATE: 0, PAN: 1, DOLLY_PAN: 2, DOLLY_ROTATE: 3 };
+
 // react-globe.gl needs window; use dynamic import to avoid SSR
 // Add loading component for better UX
-const Globe = dynamic(() => import('react-globe.gl'), { 
+const Globe = dynamic(() => import('react-globe.gl'), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
@@ -41,13 +44,13 @@ const COUNTRIES: Point[] = [
 export function GlobalPresenceGlobe() {
   const { t, language } = useLanguage();
   const points = useMemo(() => COUNTRIES.map(c => ({ ...c, size: 0.8 })), []);
-  
+
   // Create translated country names
   const getCountryName = (countryKey: string) => {
     return t(`aboutUs.globalPresence.countries.${countryKey}`) || countryKey;
   };
-  
-  const translatedPoints = useMemo(() => 
+
+  const translatedPoints = useMemo(() =>
     points.map(point => ({
       ...point,
       translatedName: getCountryName(point.name)
@@ -91,8 +94,8 @@ export function GlobalPresenceGlobe() {
 
     // Ensure two-finger pinch to zoom and pan on mobile
     if (controls.touches) {
-      controls.touches.ONE = THREE.TOUCH.ROTATE;
-      controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
+      controls.touches.ONE = TOUCH.ROTATE;
+      controls.touches.TWO = TOUCH.DOLLY_PAN;
     }
   }, [size.w, size.h]);
 
@@ -159,7 +162,7 @@ export function GlobalPresenceGlobe() {
                 labelAltitude={0.02}
                 atmosphereAltitude={0.15}
                 enablePointerInteraction={true}
-                onLabelClick={() => {}}
+                onLabelClick={() => { }}
               />
             </div>
           </div>

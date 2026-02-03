@@ -1,6 +1,7 @@
 /**
  * Optimized Image Component Wrapper
  * Automatically adds blur placeholders and optimal loading settings
+ * Handles GridFS images by bypassing Next.js optimization to avoid 400 errors
  */
 
 import Image, { ImageProps } from 'next/image';
@@ -18,7 +19,16 @@ interface OptimizedImageProps extends Omit<ImageProps, 'placeholder' | 'blurData
 }
 
 /**
+ * Check if a URL is a GridFS image (API route)
+ */
+function isGridFSImage(src: string | object): boolean {
+  if (typeof src !== 'string') return false;
+  return src.includes('/api/gridfs/');
+}
+
+/**
  * Optimized Image component with automatic blur placeholder
+ * GridFS images bypass Next.js optimization to avoid 400 errors
  * 
  * Usage:
  * ```tsx
@@ -39,7 +49,13 @@ export function OptimizedImage({
   quality = 85,
   ...props
 }: OptimizedImageProps) {
-  const blurDataURL = useBlur
+  // Check if this is a GridFS image
+  const isGridFS = isGridFSImage(src);
+
+  // Don't use blur for GridFS images (they come from API routes)
+  const shouldUseBlur = useBlur && !isGridFS;
+
+  const blurDataURL = shouldUseBlur
     ? customBlurDataURL || getBlurDataURL(typeof src === 'string' ? src : '')
     : undefined;
 
@@ -48,8 +64,10 @@ export function OptimizedImage({
       src={src}
       alt={alt}
       quality={quality}
-      placeholder={useBlur ? 'blur' : 'empty'}
+      placeholder={shouldUseBlur ? 'blur' : 'empty'}
       blurDataURL={blurDataURL}
+      // Disable Next.js optimization for GridFS images to avoid 400 errors
+      unoptimized={isGridFS}
       {...props}
     />
   );
