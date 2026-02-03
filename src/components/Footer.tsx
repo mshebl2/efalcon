@@ -306,6 +306,20 @@ export function Footer() {
               </div>
             </div>
           </motion.div>
+          <motion.p 
+  className="text-gray-500 text-xs text-center"
+  variants={itemVariants}
+>
+  {language === 'ar' ? 'تم التصميم بواسطة' : 'Designed by'}{' '}
+  <a
+    href="https://wa.me/966541430116"
+    target="_blank"
+    className="hover:text-[#EFC132] transition"
+  >
+    رواد الرقمية
+  </a>
+</motion.p>
+
         </div>
       </motion.footer>
   );
