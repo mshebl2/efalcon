@@ -7,9 +7,10 @@ function isValidObjectId(id: string): boolean {
   return /^[a-fA-F0-9]{24}$/.test(id);
 }
 
-export async function GET(_request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const fileId = params.id;
+    // Next.js 15: params is now a Promise and must be awaited
+    const { id: fileId } = await params;
 
     // Validate presence
     if (!fileId) {
