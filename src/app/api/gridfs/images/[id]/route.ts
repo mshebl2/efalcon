@@ -1,19 +1,38 @@
 import { NextRequest } from 'next/server';
 import { GridFSUtils } from '@/lib/gridfs';
+import { ObjectId } from 'mongodb';
+
+// Validate MongoDB ObjectId format (24 hex characters)
+function isValidObjectId(id: string): boolean {
+  return /^[a-fA-F0-9]{24}$/.test(id);
+}
 
 export async function GET(_request: NextRequest, { params }: { params: { id: string } }) {
   try {
     const fileId = params.id;
+
+    // Validate presence
     if (!fileId) {
+      console.error('[GridFS] Missing file ID');
       return new Response('Missing id', { status: 400 });
     }
 
-    // Fetch file buffer and basic metadata
+    // Validate ObjectId format BEFORE attempting database operations
+    if (!isValidObjectId(fileId)) {
+      console.error('[GridFS] Invalid ObjectId format:', fileId);
+      return new Response('Invalid file ID format', { status: 400 });
+    }
+
+    // Get file info first to check existence and get content type
+    const fileInfo = await GridFSUtils.getFileInfo(fileId);
+    if (!fileInfo) {
+      console.error('[GridFS] File not found:', fileId);
+      return new Response('File not found', { status: 404 });
+    }
+
+    // Fetch file buffer
     const buffer = await GridFSUtils.downloadFile(fileId);
-    // We don't have contentType from download, list metadata instead
-    const files = await GridFSUtils.listFiles();
-    const meta = files.find((f) => f._id.toString() === fileId);
-    const contentType = meta?.contentType || 'application/octet-stream';
+    const contentType = fileInfo.contentType || 'application/octet-stream';
 
     // Generate ETag for caching
     const crypto = require('crypto');
@@ -31,9 +50,10 @@ export async function GET(_request: NextRequest, { params }: { params: { id: str
         'Vary': 'Accept-Encoding'
       }
     });
-  } catch (e) {
+  } catch (e: any) {
+    console.error('[GridFS] Error serving file:', e?.message || e);
     return new Response('Not found', { status: 404 });
   }
 }
 
- 
+

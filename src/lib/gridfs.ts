@@ -4,7 +4,7 @@ import clientPromise from './mongodb';
 export interface GridFSFile {
   _id: ObjectId;
   filename: string;
-  contentType: string;
+  contentType?: string; // Optional - may not be set for all files
   length: number;
   chunkSize: number;
   uploadDate: Date;
@@ -38,6 +38,7 @@ export class GridFSUtils {
   ): Promise<string> {
     const bucket = await this.getBucket();
     const uploadStream = bucket.openUploadStream(filename, {
+      contentType: contentType, // Store content type properly!
       metadata: metadata || {}
     });
 
@@ -54,7 +55,7 @@ export class GridFSUtils {
   static async downloadFile(fileId: string): Promise<Buffer> {
     const bucket = await this.getBucket();
     const downloadStream = bucket.openDownloadStream(new ObjectId(fileId));
-    
+
     const chunks: Buffer[] = [];
     return new Promise((resolve, reject) => {
       downloadStream.on('data', (chunk) => chunks.push(chunk));

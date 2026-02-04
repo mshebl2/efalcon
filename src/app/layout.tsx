@@ -98,7 +98,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
 
-        <link rel="preload" href="/_next/static/css/app/layout.css" as="style" />
+        {/* CSS is automatically handled by Next.js with proper hashing */}
 
         {/* Schema JSON-LD */}
         <script
