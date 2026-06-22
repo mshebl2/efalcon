@@ -1,20 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { GridFSUtils } from '@/lib/gridfs';
-import { withAuth } from '@/lib/auth';
+import { withAuth, authenticateAdmin } from '@/lib/auth';
 
 // GET - List all images with metadata
 export async function GET(request: NextRequest) {
   try {
     const images = await GridFSUtils.listFiles();
     
-    // Filter active images and sort by order
-    const activeImages = images
-      .filter(img => img.metadata?.isActive !== false)
-      .sort((a, b) => (a.metadata?.order || 0) - (b.metadata?.order || 0));
+    // Check if request is from an authenticated admin
+    const isAdmin = authenticateAdmin(request) !== null;
+
+    // Filter active images (if not admin) and sort by order
+    const filteredImages = isAdmin
+      ? images
+      : images.filter(img => img.metadata?.isActive !== false);
+
+    const sortedImages = filteredImages.sort((a, b) => (a.metadata?.order || 0) - (b.metadata?.order || 0));
 
     const response = NextResponse.json({
       success: true,
-      data: activeImages.map(img => ({
+      data: sortedImages.map(img => ({
         _id: img._id.toString(),
         filename: img.filename,
         contentType: img.contentType,

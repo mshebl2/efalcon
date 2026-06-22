@@ -4,7 +4,7 @@ const { MongoClient, GridFSBucket } = require('mongodb');
 
 // Use the same connection string as the app
 // Use same URI the app uses (see src/lib/mongodb.ts)
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://eslamabdaltif:oneone2@cluster0.afyc9bd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://mshebl215_db_user:oIAMLDtFKqqrrpWN@cluster0.vij4xut.mongodb.net/petrowebsite?retryWrites=true&w=majority&appName=Cluster0';
 const MONGODB_DB = process.env.MONGODB_DB || 'petrowebsite';
 
 // Define banner images to upload

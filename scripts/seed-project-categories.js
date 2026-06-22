@@ -5,8 +5,8 @@
 
 const { MongoClient, ObjectId } = require('mongodb');
 
-const MONGODB_URI = 'mongodb+srv://eslamabdaltif:oneone2@cluster0.afyc9bd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
-const DB_NAME = 'petrowebsite';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://mshebl215_db_user:oIAMLDtFKqqrrpWN@cluster0.vij4xut.mongodb.net/petrowebsite?retryWrites=true&w=majority&appName=Cluster0';
+const DB_NAME = process.env.MONGODB_DB || 'petrowebsite';
 
 const projectCategories = [
   {

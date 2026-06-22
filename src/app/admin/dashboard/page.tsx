@@ -468,7 +468,6 @@ export default function AdminDashboard() {
   const getBannerImagesForPage = (page: string) => {
     const pageImages = bannerImages
       .filter(img => (img.metadata.page === page) || (!img.metadata.page && page === 'home'))
-      .filter(img => img.metadata?.isActive !== false)
       .sort((a, b) => (a.metadata?.order || 0) - (b.metadata?.order || 0));
 
     // Show all banner images for all pages
