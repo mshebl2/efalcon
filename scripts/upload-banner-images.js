@@ -91,10 +91,13 @@ async function uploadBannerImages() {
         const fileBuffer = fs.readFileSync(image.filePath);
         const fileName = path.basename(image.filePath);
 
-        // Check if image already exists
-        const existingFiles = await bucket.find({ filename: fileName }).toArray();
+        // Check if image already exists for this page
+        const existingFiles = await bucket.find({ 
+          filename: fileName,
+          'metadata.page': image.page
+        }).toArray();
         if (existingFiles.length > 0) {
-          console.log(`Image already exists: ${fileName}`);
+          console.log(`Image already exists for page ${image.page}: ${fileName}`);
           continue;
         }
 
